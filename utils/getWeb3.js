@@ -7,15 +7,18 @@ function getCredentials(node) {
     // If no keystore file found, we can't connect to any node
     let filepath = __dirname + "/../.data/credentials.json";
     if (!fs.existsSync(filepath)) {
+        console.log("DNE");
         return;
     }
 
+    // Read the keyfile into memory for usage
     let data = fs.readFileSync(filepath);
 
+    // Parse the json into an object
     let keyfile = JSON.parse(data);
 
+    // return the credentials for the desired node
     return keyfile.nodes[node];
-
 }
 
 // Returns an instance of web3 for node communication

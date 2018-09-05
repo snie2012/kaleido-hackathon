@@ -1,6 +1,6 @@
 const bodyParser = require('body-parser');
 const express = require('express');
-const SimpleStorageInstance = new (require('SimpleStorage.js'))();
+const SimpleStorageInstance = new (require('./SimpleStorage.js'))();
 const app = express();
 
 app.use(bodyParser.json());
@@ -22,11 +22,12 @@ app.post('/echo', (request, response) => {
 
 // POST deploys the SimpleStorage.sol smart contract onto your network
 // ex: curl -X POST -H "Content-Type: application/json" localhost:3000/simplestorage/deploy
-app.post('/simplestorage/deploy/:address', (request, response) => {
+app.post('/simplestorage/deploy/:address?', (request, response) => {
     let address = request.params.address ? request.params.address : null;
     SimpleStorageInstance.deploy(address).then((deployedAddress) => {
         return response.status(200).send({contractAddress: deployedAddress});
     }).catch((error) => {
+        console.log("Error in deploy: ", error);
         return response.status(400).send({errorMessage: JSON.stringify(error)});
     })
 });
@@ -37,8 +38,8 @@ app.post('/simplestorage/set', (request, response) => {
     if (!request.body.value) {
         return response.status(400).send({errorMessage: "No value set in request body"});
     }
-    SimpleStorageInstance.deploy(address).then((deployedAddress) => {
-        return response.status(200).send({contractAddress: deployedAddress});
+    SimpleStorageInstance.set(request.body.value).then((storedValue) => {
+        return response.status(200).send({value: storedValue});
     }).catch((error) => {
         return response.status(400).send({errorMessage: JSON.stringify(error)});
     })
