@@ -1,0 +1,20 @@
+{
+  "name": "kaleido-hackathon",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "setup": "node setup.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "consortium-setup-utility": "git+https://github.com/kaleido-io/consortium-setup-utility.git",
+    "express": "^4.16.3",
+    "solc": "^0.4.24",
+    "web3": "^1.0.0-beta.36"
+  }
+}

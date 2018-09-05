@@ -1,0 +1,39 @@
+{
+  "name": "Hacky McHackathon",
+  "description": "A Consortium for the Kaleido Hackathon",
+  "memberships": [
+    {
+      "name": "Example Member 1"
+    },
+    {
+      "name": "Example Member 2"
+    }
+  ],
+  "environments": [
+    {
+      "name": "Hackathon Environment",
+      "provider": "geth",
+      "consensusType": "poa",
+      "nodes": [
+        {
+          "name": "Node 1",
+          "owner": "Example Member 1"
+        },
+        {
+          "name": "Node 2",
+          "owner": "Example Member 2"
+        }
+      ],
+      "applicationCredentials": [
+        {
+          "name": "Member 1 Hacking Creds",
+          "owner": "Example Member 1"
+        },
+        {
+          "name": "Member 2 Hacking Creds",
+          "owner": "Example Member 2"
+        }
+      ]
+    }
+  ]
+}
