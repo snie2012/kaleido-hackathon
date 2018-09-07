@@ -3,6 +3,7 @@ const express = require('express');
 const SimpleStorageInstance = new (require('./SimpleStorage.js'))();
 const app = express();
 
+// Uses json as the format for reading request bodies
 app.use(bodyParser.json());
 
 // Allow CORS policy to allow anyone to call these endpoints
@@ -20,8 +21,11 @@ app.post('/echo', (request, response) => {
     response.status(200).send(request.body);
 });
 
-// POST deploys the SimpleStorage.sol smart contract onto your network
+// POST deploys the SimpleStorage.sol smart contract onto your network.
 // ex: curl -X POST -H "Content-Type: application/json" localhost:3000/simplestorage/deploy
+// Optionally, you can use a SimpleStorage contract that it already deployed by
+// adding the deployed address to the end of the url
+// ex. curl -X POST -H "Content-Type: application/json" localhost:3000/simplestorage/deploy/0xafcAfc6F48E23cEF78355A2f6D013310B84c6272
 app.post('/simplestorage/deploy/:address?', (request, response) => {
     let address = request.params.address ? request.params.address : null;
     SimpleStorageInstance.deploy(address).then((deployedAddress) => {
@@ -46,7 +50,7 @@ app.post('/simplestorage/set', (request, response) => {
 });
 
 // GET Returns the value stored in the contract
-// ex: curl -X GET -H "Content-Type: application/json" localhost:3000/simplestorage/deploy
+// ex: curl -X GET -H "Content-Type: application/json" localhost:3000/simplestorage/get
 app.get('/simplestorage/get', (request, response) => {
     SimpleStorageInstance.get().then((value) => {
         return response.status(200).send({storedValue: value});
@@ -55,6 +59,7 @@ app.get('/simplestorage/get', (request, response) => {
     })
 });
 
+// Listen on port 3000
 app.listen(3000, () => {
     console.log('listening on port 3000');
 });

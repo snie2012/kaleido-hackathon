@@ -1,14 +1,14 @@
 {
   "name": "kaleido-hackathon",
   "version": "1.0.0",
-  "description": "",
+  "description": "A base template for the Kaleido hackathon",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
     "setup": "node setup.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "dbryan",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
