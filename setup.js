@@ -1,16 +1,20 @@
+// This setup file is used to provision resources on the Kaleido platform.
+// To change the name or number of resources, you can simply edit the  hacakthon-consortium json
+// file, following the existing schema.
+// NOTE: if you change the number of nodes or application credentials, you will need to update this file.
 const KaleidoSetup = require('consortium-setup-utility/consortium-setup'); // Utility for setting up and accessing Kaleido resources
 const hackathonConsortium = require('./config/hackathon-consortium.json'); // Kaleido resources configuration file
 const dontRecreateApplicationCredentials = false;
 const API_KEY = process.argv[2]; // npm run setup -- "YOUR API KEY HERE"  OR node setup.js "YOUR API KEY HERE"
-let fs = require('fs');
+const fs = require('fs');
 
 // Derived from https://github.com/kaleido-io/frontend-challenge/blob/master/index.js
 if (!API_KEY) {
     console.log('\x1b[37m\x1b[41m%s\x1b[0m', '\n  You must provide an API Key to create a consortium  \n');
-
 } else {
     let kaleidoSetup = new KaleidoSetup(API_KEY);
     console.log('Generating Consortium Please Wait....');
+    console.log('This may take a few minutes (1-5)');
 
     kaleidoSetup.setup(hackathonConsortium, dontRecreateApplicationCredentials).then((result)=>{
 
@@ -25,7 +29,6 @@ if (!API_KEY) {
         let password1 = result.applicationCredentials[0][0].password;
 
         console.log('\x1b[37m\x1b[44m%s\x1b[0m', `\n  Connection information (${hackathonConsortium.memberships[0].name} node)  \n`);
-
         console.log('URL: ' + url1);
         console.log('User: ' + username1);
         console.log('Password: ' + password1);
@@ -39,7 +42,6 @@ if (!API_KEY) {
         let password2 = result.applicationCredentials[0][1].password;
 
         console.log('\x1b[37m\x1b[44m%s\x1b[0m', `\n  Connection information (${hackathonConsortium.memberships[1].name} node)  \n`);
-
         console.log('URL: ' + url2);
         console.log('User: ' + username2);
         console.log('Password: ' + password2);
