@@ -1,15 +1,27 @@
 # 2018 Kaleido-NCSU Hackathon
 
-Welcome hackathoners!  This repo is your starting point and your sounding board.  We've included all the code you need to provision a Kaleido environment and deploy your first solidity smart contract.  Every program is constructed with a minimalist straightforward approach, and each includes heavy documentation in an effort to provide clarity around the Ethereum compatible APIs and Javascript logic.  Feel free to use these pieces as educational resources or even as the scaffolding for your own project.  That's what they're here for...
+Welcome hackathoners!  We're thrilled that you've decided to participate in this joint venture between Kaleido and NC State.  Here is your challenge:
+
+* Come up with a valid industry use case where blockchain technology can add value by delivering additional measures of one or more of the following: security, transparency, efficiency, auditability, identity, immutability and data privacy.  The default Kaleido environments are restricted to three user nodes, so bear this limitation in mind as you brainstorm use cases.  
+* Compose a smart contract or series of smart contracts in Solidity or any other EVM compatible language.  We recommend Solidity as it is the most heavily documented.
+* Provision a Kaleido environment with at least two user nodes, using a node protocol and consensus algorithm of your choice.  You can choose between Geth + PoA or Quorum + IBFT/Raft.  Quorum allows for private transaction processing if your use case requires the need for data obfuscation.
+* Deploy and interact with the contract(s) using a Web3 library (e.g. Web3.js).  Your Web3 layer should expose the available functions in the contracts.  Don't panic, we have an easily-consumable example right here in this repo.  
+* Optionally, construct a frontend module that can interact with your backend code and ultimately communicate with the blockchain.  Everyone loves a nice UI, but don't waste too much time on this component.  The emphasis should be on the use case, smart contract and backend code.   
+* Compose a README with instructions on how to use your project.
+
+## Hackathon Repo
+
+This repo is your starting point and your sounding board.  We've included all the code you need to provision a Kaleido environment and deploy your first solidity smart contract.  Every program is constructed with a minimalist straightforward approach, and each includes heavy documentation in an effort to provide clarity around the Ethereum compatible APIs and Javascript logic.  Feel free to use these pieces as educational resources or even as the scaffolding for your own project.  That's what they're here for...
 
 OK, ready to get going?   Follow these simple instructions and we'll have you up and running in a few minutes.
 
 ## Dependencies
 
-Not much, just Node.js to drive the various programs and curl to exercise some basic REST methods:
+Not much, just Node.js to drive the various programs and curl to exercise some basic REST methods.  Optionally, you can also choose to install `jq` to format the JSON output:
 
 * [Node.js](https://nodejs.org/en/download/) - we recommend grabbing the latest LTS version
 * [curl](https://curl.haxx.se/download.html) - use the appropriate binary for you OS
+* [jq](https://stedolan.github.io/jq/) - A command-line tool that makes reading JSON data easier
 
 ## Create your Kaleido Account
 
@@ -34,11 +46,12 @@ libraries we're using:
 npm install
 ```
 
-Cool.  Now we're ready to deploy a Kaleido environment.  Our friend, `setup.js` will do all the heavy lifting
-and leave you with your very own blockchain network, fully equipped with memberships, nodes and security
-credentials.  Make sure you have that APIKEY from the previous step:
+Cool.  Now we're ready to deploy a Kaleido environment.  Our friend, `setup.js`, will do all the heavy lifting
+and leave you with your very own blockchain network fully equipped with memberships, nodes and security
+credentials.  Retrieve that APIKEY from the previous step and create the environment:
 
 ```sh
+# this program leverages the consortium-setup-utility node module
 node setup.js PASTE_YOUR_APIKEY_HERE
 ```
 
@@ -58,7 +71,7 @@ Open a second shell and kick off the `app.js` program:
 node app.js
 ```
 
-This program, along with `SimpleStorage.js` serves as our backend layer, and allows us to send JSON RPC calls to the Ethereum network by means of the Web3.js APIs.   `app.js` is the router and `SimpleStorage.js` exposes the Ethereum-compatible APIs (i.e. it has our functions).  All of these pieces are important in their own right, however the SimpleStorage program is arguably the most relevant, as it's demonstrating how to send blockchain-specific calls.  
+This program, along with `SimpleStorage.js`, serves as our backend layer and allows us to send JSON RPC calls to the Ethereum network by means of the Web3.js APIs.   `app.js` is the router and `SimpleStorage.js` exposes the Ethereum-compatible APIs (i.e. it has our smart contract functions).  All of these pieces are important in their own right, however the SimpleStorage program is arguably the most relevant, as it's demonstrating how to send blockchain-specific calls.  
 
 Great.  Now you have a running environment and callable application running locally on port 3000.  Let's go ahead and deploy the smart contract.  Back in your original shell, send a `POST` call to invoke the `deploy` function in `SimpleStorage.js`:
 
@@ -77,11 +90,24 @@ curl -X POST -H "Content-Type: application/json" localhost:3000/simplestorage/se
 Lastly, we can retrieve the value of our state variable by calling the contract's `get` function.  Once again, the `get` function in `SimpleStorage.js` maps to the `get` function in the smart contract:
 
 ```sh
-curl -x GET -H "Content-Type: application/json" localhost:3000/simplestorage/get | jq
+curl -X GET -H "Content-Type: application/json" localhost:3000/simplestorage/get | jq
 ```
 
-## Conclusion
+Congrats!  You've just instantiated and invoked a smart contract on a private Ethereum network.  Refer to the following section for additional Kaleido and Ethereum resources.  
 
-Congrats!  You've just instantiated and invoked a smart contract on a private Ethereum network.  
+## Resources
+- [Kaleido Docs](http://console.kaleido.io/docs/docs/home/)
+- [Remix](https://remix.ethereum.org) - solidity web IDE, compiler, and debugger.
+- [Remix Docs](https://remix.readthedocs.io/en/latest/)
+- [Solidity Docs](https://solidity.readthedocs.io/en/v0.4.24/) - A language for smart contracts on Ethereum
+- [Web3.js Docs](https://web3js.readthedocs.io/en/1.0/) - Ethereum compatible Javascript API for communicating with your blockchain network
+- [Node.js Docs](https://nodejs.org/dist/latest-v8.x/docs/api/)
+- [Javascript Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) - Promise objects can be tricky to new Javascript developers, but they're super powerful once you understand them
+- Examples on Kaleido
+    - [Racecourse](https://github.com/kaleido-io/racecourse)
+    - [KaleidoKards](https://github.com/kaleido-io/KaleidoKards/)
+    - [Kaleido-js](https://github.com/kaleido-io/kaleido-js)
 
-Add more resources, developer tools, libraries, how to get help.  And a little more exposition around each step.    
+## Help
+- [Github Issues](https://github.com/kaleido-io/kaleido-hackathon/issues/new) for questions that may affect/help everyone
+- Email <dylan.bryan@consensys.net> for specific questions and help   
