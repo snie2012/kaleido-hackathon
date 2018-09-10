@@ -9,6 +9,41 @@ Welcome hackathoners!  We're thrilled that you've decided to participate in this
 * Optionally, construct a frontend module that can interact with your backend code and ultimately communicate with the blockchain.  Everyone loves a nice UI, but don't waste too much time on this component.  The emphasis should be on the use case, smart contract and backend code.   
 * Compose a README with instructions on how to use your project.
 
+## Prizes
+**Actively Hiring for Fulltime and Internship Positions**
+
+	Participation
+		- Kaleido Shirts
+		- ConsenSys Swag
+		- Chance to have your App added to kaleido-io Github as a Example App
+		- 5 minute Demo App to Kaleido Core Eng Team at the Cannon Room
+		- Networking with Kaleido team
+
+	1st
+		- All Things Open tickets: https://allthingsopen.org/
+		- Lunch with team and Project debrief with Kaleido Executives
+		- Inclusion in our next major announcement
+		- Feature in Kaleido Media:
+			- Newsletter
+			- Social Media
+			- Blogpost 
+
+	2nd
+		- Amazon Gift Cards
+		- Inclusion in our next major announcement
+		- Feature in Kaleido Media:
+			- Newsletter
+			- Social Media
+			- Blogpost 
+
+	3rd
+		- Starbucks Gift Cards 
+		- Inclusion in our next major announcement
+		- Feature in Kaleido Media:
+			- Newsletter
+			- Social Media
+			- Blogpost 
+
 ## Hackathon Repo
 
 This repo is your starting point and your sounding board.  We've included all the code you need to provision a Kaleido environment and deploy your first solidity smart contract.  Every program is constructed with a minimalist straightforward approach, and each includes heavy documentation in an effort to provide clarity around the Ethereum compatible APIs and Javascript logic.  Feel free to use these pieces as educational resources or even as the scaffolding for your own project.  That's what they're here for...
