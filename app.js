@@ -42,9 +42,10 @@ app.post('/simplestorage/set', (request, response) => {
     if (!request.body.value) {
         return response.status(400).send({errorMessage: "No value set in request body"});
     }
-    SimpleStorageInstance.set(request.body.value).then((storedValue) => {
-        return response.status(200).send({value: storedValue});
+    SimpleStorageInstance.set(request.body.value).then((txReceipt) => {
+        return response.status(200).send({receipt: txReceipt});
     }).catch((error) => {
+        console.log(error);
         return response.status(400).send({errorMessage: JSON.stringify(error)});
     })
 });
@@ -55,6 +56,7 @@ app.get('/simplestorage/get', (request, response) => {
     SimpleStorageInstance.get().then((value) => {
         return response.status(200).send({storedValue: value});
     }).catch((error) => {
+        console.log(error);
         return response.status(400).send({errorMessage: JSON.stringify(error)});
     })
 });
