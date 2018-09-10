@@ -20,7 +20,7 @@ OK, ready to get going?   Follow these simple instructions and we'll have you up
 Not much, just Node.js to drive the various programs and curl to exercise some basic REST methods.  Optionally, you can also choose to install `jq` to format the JSON output:
 
 * [Node.js](https://nodejs.org/en/download/) - we recommend grabbing the latest LTS version
-* [curl](https://curl.haxx.se/download.html) - use the appropriate binary for you OS
+* [curl](https://curl.haxx.se/download.html) - use the appropriate binary for your OS
 * [jq](https://stedolan.github.io/jq/) - A command-line tool that makes reading JSON data easier
 
 ## Create your Kaleido Account
@@ -79,7 +79,7 @@ Great.  Now you have a running environment and callable application running loca
 curl -X POST -H "Content-Type: application/json" localhost:3000/simplestorage/deploy | jq
 ```
 
-This will return you the smart contract's address.  
+This will deploy the contract and return you the smart contract's address. This response is piped into jq for better readibility, if you are not using jq then you can ignore the `| jq` on the end of the command.
 
 Next, set a value for the contract's global variable - `storedData`.  Our example uses 5, but you can choose any positive integer.  We'll do this by sending another `POST` and invoking the `set` function in `SimpleStorage.js`.  The `set` function in the program maps to the `set` function in the smart contract.  Not too complicated!  
 
@@ -98,7 +98,7 @@ Congrats!  You've just instantiated and invoked a smart contract on a private Et
 ## Resources
 - [Kaleido Docs](http://console.kaleido.io/docs/docs/home/)
 - [Remix](https://remix.ethereum.org) - solidity web IDE, compiler, and debugger.
-- [Remix Docs](https://remix.readthedocs.io/en/latest/)
+   - [Remix Docs](https://remix.readthedocs.io/en/latest/)
 - [Solidity Docs](https://solidity.readthedocs.io/en/v0.4.24/) - A language for smart contracts on Ethereum
 - [Web3.js Docs](https://web3js.readthedocs.io/en/1.0/) - Ethereum compatible Javascript API for communicating with your blockchain network
 - [Node.js Docs](https://nodejs.org/dist/latest-v8.x/docs/api/)
