@@ -102,6 +102,10 @@ class SimpleStorage {
                 let defaultAccount = accounts[0];
                 console.log("Estimating the gas required to set a value");
                 // Estimate the gas required for the transaction
+                // Ethereum transactions on the chain require an Execution Fee called "gas".
+                // This gas is used to pay the miners/node for executing a transaction.
+                // In Kaleido's networks, the gas price is set to 0; so while you must specify an amount of gas to use,
+                // it doesn't actually cost anything.
                 return this.contractInterface.methods.set(value).estimateGas({from: defaultAccount}).then((gasAmount) => {
                     console.log("Sending the transaction to set a value");
                     // Send the transaction with the estimated gas
