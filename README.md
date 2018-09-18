@@ -1,6 +1,19 @@
+# Updates & Important Info
+
+Please ensure that you have completed the [Google SignUp form](bit.ly/NCSU-KH); we need everyone's email in order to send out updates and last minute changes.  It takes no more than 30 seconds - we promise.
+
+Due to the chaotic nature of Hurricane Florence, we decided to extend the hackathon by one full week.  The current plan is for attendees to meet the Kaleido team and present their projects at the Kaleido offices on September, 25 @ 6:30 pm.  We will have some food and drinks and you'll be able to pick up your participation cool swag and network with the team.  
+
+Kaleido Offices:  16 West Martin St, Raleigh NC, 27601 - 12th Floor.  
+
+For the presentations... we ask that you first outline your use case and explain why blockchain is adding value, then walk us through your smart contract and backend code, and wrap up with a short demo.  Try to keep the presentations to no more than five minutes.  We have roughly a dozen teams at the moment so we want to distribute the time equitably.  Once everyone has presented, a panel of judges from Kaleido will huddle and determine the top three projects.  
+
+Again, don't be afraid to raise an issue in this repo if you need help around Ethereum APIs, solidity or the Kaleido Platform.  We're here to help...
+
+
 # 2018 Kaleido-NCSU Hackathon
 
-Welcome hackathoners!  We're thrilled that you've decided to participate in this joint venture between Kaleido and NC State.  Here is your challenge:
+Welcome hackathoners!  We're thrilled that you've decided to participate in this joint venture between Kaleido and NC State.  You can elect to compete individually, or as a team.  **Please limit teams to NO MORE than three participants.**  Here is your challenge:
 
 * Come up with a valid industry use case where blockchain technology can add value by delivering additional measures of one or more of the following: security, transparency, efficiency, auditability, identity, immutability and data privacy.  The default Kaleido environments are restricted to three user nodes, so bear this limitation in mind as you brainstorm use cases.  
 * Compose a smart contract or series of smart contracts in Solidity or any other EVM compatible language.  We recommend Solidity as it is the most heavily documented.
@@ -8,41 +21,6 @@ Welcome hackathoners!  We're thrilled that you've decided to participate in this
 * Deploy and interact with the contract(s) using a Web3 library (e.g. Web3.js).  Your Web3 layer should expose the available functions in the contracts.  Don't panic, we have an easily-consumable example right here in this repo.  
 * Optionally, construct a frontend module that can interact with your backend code and ultimately communicate with the blockchain.  Everyone loves a nice UI, but don't waste too much time on this component.  The emphasis should be on the use case, smart contract and backend code.   
 * Compose a README with instructions on how to use your project.
-
-## Prizes
-**Actively Hiring for Fulltime and Internship Positions**
-
-	Participation
-		- Kaleido Shirts
-		- ConsenSys Swag
-		- Chance to have your App added to kaleido-io Github as a Example App
-		- 5 minute Demo App to Kaleido Core Eng Team at the Cannon Room
-		- Networking with Kaleido team
-
-	1st
-		- All Things Open tickets: https://allthingsopen.org/
-		- Lunch with team and Project debrief with Kaleido Executives
-		- Inclusion in our next major announcement
-		- Feature in Kaleido Media:
-			- Newsletter
-			- Social Media
-			- Blogpost 
-
-	2nd
-		- Amazon Gift Cards
-		- Inclusion in our next major announcement
-		- Feature in Kaleido Media:
-			- Newsletter
-			- Social Media
-			- Blogpost 
-
-	3rd
-		- Starbucks Gift Cards 
-		- Inclusion in our next major announcement
-		- Feature in Kaleido Media:
-			- Newsletter
-			- Social Media
-			- Blogpost 
 
 ## Hackathon Repo
 
@@ -55,7 +33,7 @@ OK, ready to get going?   Follow these simple instructions and we'll have you up
 Not much, just Node.js to drive the various programs and curl to exercise some basic REST methods.  Optionally, you can also choose to install `jq` to format the JSON output:
 
 * [Node.js](https://nodejs.org/en/download/) - we recommend grabbing the latest LTS version
-* [curl](https://curl.haxx.se/download.html) - use the appropriate binary for your OS
+* [curl](https://curl.haxx.se/download.html) - use the appropriate binary for you OS
 * [jq](https://stedolan.github.io/jq/) - A command-line tool that makes reading JSON data easier
 
 ## Create your Kaleido Account
@@ -114,7 +92,7 @@ Great.  Now you have a running environment and callable application running loca
 curl -X POST -H "Content-Type: application/json" localhost:3000/simplestorage/deploy | jq
 ```
 
-This will deploy the contract and return you the smart contract's address. This response is piped into jq for better readibility, if you are not using jq then you can ignore the `| jq` on the end of the command.
+This will return you the smart contract's address.  
 
 Next, set a value for the contract's global variable - `storedData`.  Our example uses 5, but you can choose any positive integer.  We'll do this by sending another `POST` and invoking the `set` function in `SimpleStorage.js`.  The `set` function in the program maps to the `set` function in the smart contract.  Not too complicated!  
 
@@ -133,7 +111,7 @@ Congrats!  You've just instantiated and invoked a smart contract on a private Et
 ## Resources
 - [Kaleido Docs](http://console.kaleido.io/docs/docs/home/)
 - [Remix](https://remix.ethereum.org) - solidity web IDE, compiler, and debugger.
-   - [Remix Docs](https://remix.readthedocs.io/en/latest/)
+- [Remix Docs](https://remix.readthedocs.io/en/latest/)
 - [Solidity Docs](https://solidity.readthedocs.io/en/v0.4.24/) - A language for smart contracts on Ethereum
 - [Web3.js Docs](https://web3js.readthedocs.io/en/1.0/) - Ethereum compatible Javascript API for communicating with your blockchain network
 - [Node.js Docs](https://nodejs.org/dist/latest-v8.x/docs/api/)
