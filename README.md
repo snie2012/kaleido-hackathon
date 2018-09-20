@@ -2,7 +2,7 @@
 
 Please ensure that you have completed the [Google SignUp form](bit.ly/NCSU-KH); we need everyone's email in order to send out updates and last minute changes.  It takes no more than 30 seconds - we promise.
 
-Due to the chaotic nature of Hurricane Florence, we decided to extend the hackathon by one full week.  The current plan is for attendees to meet the Kaleido team and present their projects at the Kaleido offices on September, 25 @ 6:30 pm.  We will have some food and drinks and you'll be able to pick up your participation cool swag and network with the team.  
+Due to the chaotic nature of Hurricane Florence, we decided to extend the hackathon by one full week.  The current plan is for attendees to meet the Kaleido team and present their projects at the Kaleido offices on September, 25 @ 6:30 pm.  We will have some food and drinks and you'll be able to pick up your participation swag and network with the team.  
 
 Kaleido Offices:  16 West Martin St, Raleigh NC, 27601 - 12th Floor.  
 
