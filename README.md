@@ -112,7 +112,7 @@ Congrats!  You've just instantiated and invoked a smart contract on a private Et
 - [Kaleido Docs](http://console.kaleido.io/docs/docs/home/)
 - [Remix](https://remix.ethereum.org) - solidity web IDE, compiler, and debugger.
 - [Remix Docs](https://remix.readthedocs.io/en/latest/)
-- [Solidity Docs](https://solidity.readthedocs.io/en/v0.4.24/) - A language for smart contracts on Ethereum
+- [Solidity Docs](https://solidity.readthedocs.io/en/v0.4.25/) - A language for smart contracts on Ethereum
 - [Web3.js Docs](https://web3js.readthedocs.io/en/1.0/) - Ethereum compatible Javascript API for communicating with your blockchain network
 - [Node.js Docs](https://nodejs.org/dist/latest-v8.x/docs/api/)
 - [Javascript Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) - Promise objects can be tricky to new Javascript developers, but they're super powerful once you understand them
