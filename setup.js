@@ -23,34 +23,18 @@ if (!API_KEY) {
 
         let credentials = {nodes: []};
 
-        // Log the credentials to the console for the first node
-        let url1 = result.nodes[0][0].urls.rpc;
-        let username1 = result.applicationCredentials[0][0].username;
-        let password1 = result.applicationCredentials[0][0].password;
-
-        console.log('\x1b[37m\x1b[44m%s\x1b[0m', `\n  Connection information (${hackathonConsortium.memberships[0].name} node)  \n`);
-        console.log('URL: ' + url1);
-        console.log('User: ' + username1);
-        console.log('Password: ' + password1);
-
-        let node1 = {url: url1, username: username1, password: password1};
-        credentials.nodes.push(node1);
-
-        // Repeat for the second node
-        let url2 = result.nodes[0][1].urls.rpc;
-        let username2 = result.applicationCredentials[0][1].username;
-        let password2 = result.applicationCredentials[0][1].password;
-
-        console.log('\x1b[37m\x1b[44m%s\x1b[0m', `\n  Connection information (${hackathonConsortium.memberships[1].name} node)  \n`);
-        console.log('URL: ' + url2);
-        console.log('User: ' + username2);
-        console.log('Password: ' + password2);
-
-        let node2 = {url: url2, username: username2, password: password2};
-        credentials.nodes.push(node2);
+        for (let i = 0; i < result.nodes[0].length; i++) {
+            let node = {
+                url: result.nodes[0][i].urls.rpc,
+                username: result.applicationCredentials[0][i].username, 
+                password: result.applicationCredentials[0][i].password
+            };
+            credentials.nodes.push(node);
+        }
 
         // Write the credentials to a hidden file for later use
         !fs.existsSync('.data') && fs.mkdirSync('.data');
+        fs.writeFileSync('.data/setup_result.json', JSON.stringify(result));
         fs.writeFileSync('.data/credentials.json', JSON.stringify(credentials));
     }).catch((error) => {
         // Catch and print any errors encountered

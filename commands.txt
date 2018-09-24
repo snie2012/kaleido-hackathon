@@ -1,0 +1,3 @@
+curl -X POST -H "Content-Type: application/json" localhost:3000/realestate/deploy | jq
+
+curl -X POST -H "Content-Type: application/json" localhost:3000/realestate/declareownership -d '{"owner":"0", "houseName": "Beach House"}' | jq

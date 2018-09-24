@@ -1,18 +1,24 @@
 const solc = require('solc');
 const fs = require('fs');
 const path = require('path');
+const Web3 = require('web3');
 let getWeb3 = require('./utils/getWeb3.js'); // returns promise object containing web3 connection to a node
 
 // the default value to store in the contract during construction/deployment
-const defaultValue = 0;
+const numParticipants = 3;
+const names = ["Mountain View", "Beach House", "Skyscrape"].map(name => Web3.utils.fromAscii(name));
+const values = [100, 100, 100];
 
 // This serves as a js wrapper class for interacting with the SimpleStorage.sol smart contract
-class SimpleStorage {
+class RealEstate {
 
     // Instantiates the class, declares some simple properties, and gets web3 communication objects.
     constructor() {
-        this.node1 = getWeb3(0);
-        this.node2 = getWeb3(1); // this node is not used in this example
+        this.nodes = [];
+        for (let i = 0; i < numParticipants; i++) {
+            this.nodes.push(getWeb3(i));
+        }
+        this.defaultNode = this.nodes[0];
         this.compiled = false;
         this.contractAddress = "";
     }
@@ -23,20 +29,18 @@ class SimpleStorage {
     compile() {
         // Check if it is already compiled
         if (!this.compiled) {
-            // Find the file and read it into memory
-            let filePath = path.resolve(__dirname, 'contracts', 'SimpleStorage.sol');
+            console.log('+++++++++++++++++++');
+            let filePath = path.resolve(__dirname, 'contracts', 'RealEstate.sol');
             let fileSource = fs.readFileSync(filePath, 'UTF-8');
+            console.log(fileSource);
 
-            // Compile the contract with the contract source and 1 for optimization
             let compiled = solc.compile(fileSource, 1);
 
-            // Store the bytecode, as we need it for deployment
-            this.bytecode = "0x" + compiled.contracts[':simplestorage'].bytecode;
-
-            // Store the abi (application binary interface) for js to interface with the contract on the chain
-            let contractInterface = compiled.contracts[':simplestorage'].interface; // this is a json object that web3 uses as an interface
+            this.bytecode = "0x" + compiled.contracts[':RealEstate'].bytecode;
+            let contractInterface = compiled.contracts[':RealEstate'].interface;
             this.abi = JSON.parse(contractInterface);
             this.compiled = true;
+            console.log('+++++++++++++++++++');
         }
     }
 
@@ -50,19 +54,22 @@ class SimpleStorage {
         // if there is an address passed in then assume that it is already deployed
         if (contractAddress !== null) {
             this.contractAddress = contractAddress;
-            return this.node1.then((web3) => {
+            return this.defaultNode.then((web3) => {
                 this.contractInterface = new web3.eth.Contract(this.abi, this.contractAddress);
                 return this.contractAddress;
             });
         }
 
         // No address provided so let's deploy a new one onto the chain
-        return this.node1.then((web3) => {
+        return this.defaultNode.then((web3) => {
             let contract = new web3.eth.Contract(this.abi);
-            console.log("Getting default account from node1 to deploy new contract");
+            console.log("Getting default account from defaultNode to deploy new contract");
             return web3.eth.getAccounts().then((accounts) => {
                 console.log("Deploying new contract from address: " + accounts[0]);
-                return contract.deploy({ data: this.bytecode, arguments: [defaultValue] }).send({
+                return contract.deploy({
+                    data: this.bytecode,
+                    arguments: [names, values]
+                }).send({
                     data: this.bytecode,
                     from: accounts[0],
                     gasPrice: 0,
@@ -78,25 +85,12 @@ class SimpleStorage {
 
     }
 
-    // Returns a promise object containing the value set in the contract
-    get() {
-        // call the get method on the contract and return the value
-        // this uses call() instead of send() because it is only reading from the chain
-        return this.contractInterface.methods.get().call().then((response) => {
-            return response;
-        })
-    }
-
-    // Sets the value in the contract
-    // Returns a promise object containing a transaction receipt
-    set(stringValue) {
-        // Change json string to int value
-        let value = parseInt(stringValue);
-
-        console.log("Connecting to node1");
-        // Use node1 to send the transaction
-        return this.node1.then((web3) => {
-            console.log("Getting the default account from node1");
+    declareOwnership(houseName, owner) {
+        console.log(this);
+        var houseName = Web3.utils.fromAscii(houseName);
+        console.log("Connecting to node" + owner);
+        return this.nodes[parseInt(owner)].then((web3) => {
+            console.log("Getting the default account from node" + owner);
             // Use the default account on the node
             return web3.eth.getAccounts().then(accounts => {
                 let defaultAccount = accounts[0];
@@ -106,16 +100,15 @@ class SimpleStorage {
                 // This gas is used to pay the miners/node for executing a transaction.
                 // In Kaleido's networks, the gas price is set to 0; so while you must specify an amount of gas to use,
                 // it doesn't actually cost anything.
-                return this.contractInterface.methods.set(value).estimateGas({ from: defaultAccount }).then((gasAmount) => {
-                    console.log("Sending the transaction to set a value");
+                return this.contractInterface.methods.declareOwnership(houseName).estimateGas({ from: defaultAccount }).then((gasAmount) => {
+                    console.log("Declaring ownership of " + houseName + " to be node" + owner);
                     // Send the transaction with the estimated gas
-                    return this.contractInterface.methods.set(value).send({ from: defaultAccount, gas: gasAmount });
+                    return this.contractInterface.methods.declareOwnership(houseName).send({ from: defaultAccount, gas: gasAmount });
                 });
             });
         });
     }
-
 }
 
 // Export the class for other files to import and use
-module.exports = SimpleStorage;
+module.exports = RealEstate;
